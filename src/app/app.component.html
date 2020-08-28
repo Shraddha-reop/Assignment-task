@@ -1,282 +1,44 @@
-<!DOCTYPE html>
-<html>
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/flexbox-website']">Responsive Flex-Layout</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['/flexbox-image-gallary']"> Responsive Grid-Layout</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/dynamic-component-loading']">Dynamic-component-loading</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/angular-material']">Angular-material</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/bootstrap']">Bootstrap</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/ngrx']">NgRx</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="http://localhost:6006/" target="_blank">Storybook</a>
+      </li>
+    </ul>
+  </div>
+</nav>   -->
 
+<!-- <div class="container">
+  <router-outlet>
+  </router-outlet>
+</div> -->
 
-<body>
-  <header class="header-class">
-    <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
-      <mdb-navbar-brand><img src="../assets/images/ANALYSIS STUDIO LOGO-B 2.png" /></mdb-navbar-brand>
-      <links>
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <button type="button" mdbBtn color="link">SERVICES</button>
-          </li>
-          <li class="nav-item">
-            <button type="button" mdbBtn color="link">PRODUCT</button>
-          </li>
-          <li class="nav-item">
-            <button type="button" mdbBtn color="link">COMUNITY</button>
-          </li>
-          <li class="nav-item">
-            <button type="button" mdbBtn color="link">WHO WE ARE?</button>
-          </li>
-          <li class="nav-item">
-            <button mdbBtn type="button" color="purple" mdbWavesEffect>HIRE A FREELANCER</button>
-          </li>
-        </ul>
+<!-- <h1 i18n="@@welcome" >Hello World!!</h1>
+<h1 i18n="@@sampletext" >This is just a demo of how to use i18n in angular application.</h1>
 
-        <ul class="navbar-nav ml-auto nav-flex-icons">
-          <li class="nav-item">
-            <a class="nav-link">
-              <mdb-icon fab icon="twitter"></mdb-icon>
-            </a>
-          </li>
-        </ul>
-      </links>
-
-    </mdb-navbar>
-    <aside class="header-data">
-      <h2 style="color: white;">A PLATFORM FOR ALL</h2>
-     <h1 style="color: white; font-size: 73px;
-     font-weight: 700;">DATA RELATED</h1>
-     <h1 style="color: white;">SERVICES & PRODUCTS</h1>
-     <P style="color: white;">Create desktop-installed apps across Mac, Windows, and
-      Linux using the same Angular methods you've learned for the web plus the ability to access native OS APIs</P>
-      <button mdbBtn type="button" color="deep-purple"  style="margin-bottom: 5rem;" mdbWavesEffect>Read
-        More</button>
-    </aside>
-
-  </header>
-
-  <!-- Here is our page's main content -->
-  <main>
-
-    <!-- It contains an article -->
-    <article>
-
-    </article>
-
-    <section>
-      <h1 class="heading">our products</h1>
-
-      <div class="row">
-        <div class="col-lg-4 col-md-12">
-          <mdb-card>
-            <!--Card image-->
-            <img src="../assets/images/img1.PNG" />
-            <!--Card content-->
-
-          </mdb-card>
-          <!--/.Card-->
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <!--Card-->
-          <mdb-card cascade="true" wider="true">
-            <img src="../assets/images/img2.PNG" />
-          </mdb-card>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <mdb-card cascade="true">
-            <img src="../assets/images/img3.PNG">
-          </mdb-card>
-        </div>
-      </div>
-    </section>
-    <section>
-      <h1 class="heading">our services</h1>
-      <div class="services">
-        <div class="row">
-          <div class="col-md-6">
-            <mdb-card>
-              <!--Card image-->
-              <img class="service-img" src="../assets/images/img5.PNG" />
-              <!--Card content-->
-
-            </mdb-card>
-            <!--/.Card-->
-          </div>
-
-          <div class="col-md-6">
-            <!--Card-->
-            <mdb-card cascade="true" wider="true">
-              <img class="service-img" src="../assets/images/img6.PNG" />
-            </mdb-card>
-          </div>
-        </div>
-      </div>
-      <h1 class="heading"><img src="../assets/images/img7.PNG"></h1>
-    </section>
-    <section class="community-class">
-      <div>
-
-        <h1 style="color: white; font-family:  Helvetica, sans-serif;padding: 5rem 5rem 0rem 5rem;">our community</h1>
-        <h1 style=" color:white; font-size: 24px; font-weight: bold; margin-top: 3rem;padding: 0 5rem;">FREELANCING
-          PLATFORM</h1>
-        <p style="font-weight: bold; color: white;padding: 0 5rem; width: 43rem;">Set up and Use modern web platform
-          capabilities to deliver app-like experiences. High performance, offline, and zero-step installation</p>
-        <p style="color: white;padding: 0 5rem; width: 43rem;">Create desktop-installed apps across Mac, Windows, and
-          Linux using the same Angular methods you've learned for the web plus the ability to access native OS APIs.</p>
-        <button mdbBtn type="button" color="deep-purple" style="margin: 0 5rem 5rem 5rem;" mdbWavesEffect>Read
-          More</button>
-
-      </div>
-    </section>
-    <section>
-      <h1 class="heading">features</h1>
-
-      <div class="row">
-        <div class="col-lg-4 col-md-12">
-          <mdb-card>
-            <!--Card image-->
-            <img src="../assets/images/img8.PNG" />
-            <!--Card content-->
-
-          </mdb-card>
-          <!--/.Card-->
-        </div>
-
-        <div class="col-lg-4 col-md-6">
-          <!--Card-->
-          <mdb-card cascade="true" wider="true">
-            <img src="../assets/images/img9.PNG" />
-          </mdb-card>
-        </div>
-        <div class="col-lg-4 col-md-6">
-          <mdb-card cascade="true">
-            <img src="../assets/images/img10.PNG">
-          </mdb-card>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="personal-recom">
-      <h1 style=" text-align: center;
-      color: black;
-      font-size: 18px; padding: 5rem 0 0 0rem;
-    font-weight: 700;
-    width: 23rem;
-    margin-left: 25rem;">CONFUSED ABOUT WHICH SERVICES SUITS THE BEST FOR YOUR WORK?</h1>
-      <P style=" text-align: center;
-       color: white;
-       width: 26rem;
-    margin-left: 25rem;
-       ">Use modern web platform capabilities to deliver app-like experiences. High performance, offline, and zero-step
-        installation.
-
-      </P>
-      <button mdbBtn type="button" color="deep-purple" style="    margin-left: 30rem;
-      margin-bottom: 6rem;" mdbWavesEffect>Get Personal Recommendation</button>
-    </section>
-    <section>
-      <h1 class="heading">latest videos & news</h1>
-      <div class="services">
-        <div class="row">
-          <div class="col-md-6">
-            <mdb-card>
-              <!--Card image-->
-              <img class="service-img" src="../assets/images/img13.PNG" />
-              <!--Card content-->
-
-            </mdb-card>
-            <!--/.Card-->
-          </div>
-
-          <div class="col-md-6">
-            <!--Card-->
-            <mdb-card cascade="true" wider="true">
-              <img class="service-img" src="../assets/images/img14.PNG" />
-            </mdb-card>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <h1 class="heading">happy customers</h1>
-      <mdb-card>
-        <img style="margin: 0 10rem;" src="../assets/images/img15.PNG">
-      </mdb-card>
-      <h1 class="heading"><img src="../assets/images/img7.PNG"></h1>
-    </section>
-  </main>
-
-
-  <footer class="page-footer font-small indigo">
-    <div class="container text-center text-md-left">
-
-
-      <div class="row">
-
-        <!-- Grid column -->
-        <div class="col-md-3 mx-auto">
-
-          <!-- Links -->
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4" style="margin-top: 4rem;">Analysis Studio</h5>
-
-          <ul class="list-unstyled">
-            <li>
-              <img  src="../assets/images/img17.PNG">
-            </li>
-          </ul>
-
-        </div>
-        <!-- Grid column -->
-
-        <hr class="clearfix w-100 d-md-none">
-
-        <!-- Grid column -->
-        <div class="col-md-3 mx-auto">
-
-          <!-- Links -->
-
-
-          <img style="margin-left: 16rem;margin-top: 4rem;" src="../assets/images/img18.PNG">
-
-
-        </div>
-        <!-- Grid column -->
-
-        <hr class="clearfix w-100 d-md-none">
-
-        <!-- Grid column -->
-        <div class="col-md-3 mx-auto">
-
-          <!-- Links -->
-
-
-          <img style="margin-left: 12rem;margin-top: 4rem;" src="../assets/images/img20.PNG">
-
-        </div>
-        <!-- Grid column -->
-
-        <hr class="clearfix w-100 d-md-none">
-
-        <!-- Grid column -->
-        <div class="col-md-3 mx-auto">
-
-          <!-- Links -->
-
-          <img style="margin-left: 8rem; margin-top: 4rem" src="../assets/images/img20.PNG">
-
-        </div>
-        <!-- Grid column -->
-
-      </div>
-      <!-- Grid row -->
-
-    </div>
-    <!-- Footer Links -->
-
-    <!-- Copyright -->
-    <div class="footer-copyright text-center py-3">© 2020 Copyright:
-      <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
-    </div>
-    <!-- Copyright -->
-
-  </footer>
-  <!-- Footer -->
-
-</body>
-
-</html>
+<a href="\">English</a>
+<br>
+<a href="\ma">Gujarati</a>
+<br>
+<a href="\hi">Hindi</a> -->

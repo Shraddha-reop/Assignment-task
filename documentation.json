@@ -1,0 +1,1909 @@
+{
+    "pipes": [],
+    "interfaces": [],
+    "injectables": [
+        {
+            "name": "AppEffects",
+            "id": "injectable-AppEffects-c18f87c65069ae255996cd536cdd3833",
+            "file": "src/app/effects/app.effects.ts",
+            "properties": [
+                {
+                    "name": "userData$",
+                    "defaultValue": "this.actions$.pipe(\r\n        ofType(AppActionType.FETCH_USER_DATA),\r\n        switchMap((action: FetchUserData) => {\r\n            return this.activityService.fetchData().pipe(\r\n                map((obj: any) => new FetchUserDataSuccess(obj)),\r\n                catchError(error => of(new FetchUserDataError(error.status)))\r\n            );\r\n        })\r\n    )",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13,
+                    "decorators": [
+                        {
+                            "name": "Effect",
+                            "stringifiedArguments": ""
+                        }
+                    ],
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "methods": [],
+            "description": "",
+            "sourceCode": "import { Injectable } from '@angular/core';\r\nimport { Store } from '@ngrx/store';\r\nimport { AppState } from '../app.model';\r\nimport { Effect, Actions, ofType } from '@ngrx/effects';\r\nimport { AppServiceService } from '../services/app-service.service';\r\nimport { AppActionType, FetchUserData, FetchUserDataSuccess, FetchUserDataError } from '../store/app.actions';\r\nimport { switchMap, map, catchError } from 'rxjs/operators';\r\nimport { of } from 'rxjs';\r\n@Injectable()\r\nexport class AppEffects {\r\n\r\n    @Effect()\r\n    public userData$ = this.actions$.pipe(\r\n        ofType(AppActionType.FETCH_USER_DATA),\r\n        switchMap((action: FetchUserData) => {\r\n            return this.activityService.fetchData().pipe(\r\n                map((obj: any) => new FetchUserDataSuccess(obj)),\r\n                catchError(error => of(new FetchUserDataError(error.status)))\r\n            );\r\n        })\r\n    );\r\n    constructor( private store: Store<AppState>,private actions$: Actions, private activityService: AppServiceService,) {}\r\n\r\n}",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "store",
+                        "type": "Store<AppState>"
+                    },
+                    {
+                        "name": "actions$",
+                        "type": "Actions"
+                    },
+                    {
+                        "name": "activityService",
+                        "type": "AppServiceService"
+                    }
+                ],
+                "line": 21,
+                "jsdoctags": [
+                    {
+                        "name": "store",
+                        "type": "Store<AppState>",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "actions$",
+                        "type": "Actions",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "activityService",
+                        "type": "AppServiceService",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        },
+        {
+            "name": "AppServiceService",
+            "id": "injectable-AppServiceService-376dca7676cc977eb2e768396107d486",
+            "file": "src/app/services/app-service.service.ts",
+            "properties": [
+                {
+                    "name": "http",
+                    "type": "HttpClient",
+                    "optional": false,
+                    "description": "",
+                    "line": 9,
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "fetchData",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Observable<any>",
+                    "typeParameters": [],
+                    "line": 11,
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "description": "",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { Observable } from 'rxjs';\nimport { HttpClient } from '@angular/common/http';\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class AppServiceService {\n  constructor(public http: HttpClient) { }\n\n  public fetchData(): Observable<any> {\n    return this.http.get<any>(` https://demo6335756.mockable.io/Countries`);\n  }\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient"
+                    }
+                ],
+                "line": 8,
+                "jsdoctags": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "type": "injectable"
+        }
+    ],
+    "classes": [
+        {
+            "name": "AppModelState",
+            "id": "class-AppModelState-95ac1b421ddd51302fb5a13b70654908",
+            "file": "src/app/models/appModel.model.ts",
+            "type": "class",
+            "sourceCode": "export class AppModelState {\r\n    data: any\r\n\r\n}",
+            "properties": [
+                {
+                    "name": "data",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 2
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "AppState",
+            "id": "class-AppState-8b170a2d49eab1e89b4123adbd7ff197",
+            "file": "src/app/app.model.ts",
+            "type": "class",
+            "sourceCode": "import { AppModelState } from './models/appModel.model';\r\n\r\nexport class AppState {\r\n    appModel: AppModelState;\r\n}",
+            "properties": [
+                {
+                    "name": "appModel",
+                    "type": "AppModelState",
+                    "optional": false,
+                    "description": "",
+                    "line": 4
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": []
+        },
+        {
+            "name": "FetchUserData",
+            "id": "class-FetchUserData-b359d3bd8bd9a44b2c5d9535bc4eadf3",
+            "file": "src/app/store/app.actions.ts",
+            "type": "class",
+            "sourceCode": "import { Action } from '@ngrx/store';\r\n\r\nexport enum AppActionType {\r\n    FETCH_USER_DATA = 'Activity: FETCH_USER_DATA',\r\n    FETCH_USER_DATA_SUCCESS = 'Activity: FETCH_USER_DATA_SUCCESS',\r\n    FETCH_USER_DATA_ERROR = 'Activity: FETCH_USER_DATA_ERROR'\r\n}\r\nexport class FetchUserData implements Action {\r\n    readonly type = AppActionType.FETCH_USER_DATA;\r\n    constructor() {}\r\n}\r\n\r\nexport class FetchUserDataSuccess implements Action {\r\n    readonly type = AppActionType.FETCH_USER_DATA_SUCCESS;\r\n    constructor(public payload: any) {}\r\n}\r\n\r\nexport class FetchUserDataError implements Action {\r\n    readonly type = AppActionType.FETCH_USER_DATA_ERROR;\r\n    constructor(public error: any) {}\r\n}\r\nexport type AppAction = \r\n| FetchUserData\r\n| FetchUserDataSuccess;",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 9
+            },
+            "properties": [
+                {
+                    "name": "type",
+                    "defaultValue": "AppActionType.FETCH_USER_DATA",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 9,
+                    "modifierKind": [
+                        132
+                    ]
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "implements": [
+                "Action"
+            ]
+        },
+        {
+            "name": "FetchUserDataError",
+            "id": "class-FetchUserDataError-b359d3bd8bd9a44b2c5d9535bc4eadf3",
+            "file": "src/app/store/app.actions.ts",
+            "type": "class",
+            "sourceCode": "import { Action } from '@ngrx/store';\r\n\r\nexport enum AppActionType {\r\n    FETCH_USER_DATA = 'Activity: FETCH_USER_DATA',\r\n    FETCH_USER_DATA_SUCCESS = 'Activity: FETCH_USER_DATA_SUCCESS',\r\n    FETCH_USER_DATA_ERROR = 'Activity: FETCH_USER_DATA_ERROR'\r\n}\r\nexport class FetchUserData implements Action {\r\n    readonly type = AppActionType.FETCH_USER_DATA;\r\n    constructor() {}\r\n}\r\n\r\nexport class FetchUserDataSuccess implements Action {\r\n    readonly type = AppActionType.FETCH_USER_DATA_SUCCESS;\r\n    constructor(public payload: any) {}\r\n}\r\n\r\nexport class FetchUserDataError implements Action {\r\n    readonly type = AppActionType.FETCH_USER_DATA_ERROR;\r\n    constructor(public error: any) {}\r\n}\r\nexport type AppAction = \r\n| FetchUserData\r\n| FetchUserDataSuccess;",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "error",
+                        "type": "any"
+                    }
+                ],
+                "line": 19,
+                "jsdoctags": [
+                    {
+                        "name": "error",
+                        "type": "any",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "properties": [
+                {
+                    "name": "error",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "type",
+                    "defaultValue": "AppActionType.FETCH_USER_DATA_ERROR",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
+                    "modifierKind": [
+                        132
+                    ]
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "implements": [
+                "Action"
+            ]
+        },
+        {
+            "name": "FetchUserDataSuccess",
+            "id": "class-FetchUserDataSuccess-b359d3bd8bd9a44b2c5d9535bc4eadf3",
+            "file": "src/app/store/app.actions.ts",
+            "type": "class",
+            "sourceCode": "import { Action } from '@ngrx/store';\r\n\r\nexport enum AppActionType {\r\n    FETCH_USER_DATA = 'Activity: FETCH_USER_DATA',\r\n    FETCH_USER_DATA_SUCCESS = 'Activity: FETCH_USER_DATA_SUCCESS',\r\n    FETCH_USER_DATA_ERROR = 'Activity: FETCH_USER_DATA_ERROR'\r\n}\r\nexport class FetchUserData implements Action {\r\n    readonly type = AppActionType.FETCH_USER_DATA;\r\n    constructor() {}\r\n}\r\n\r\nexport class FetchUserDataSuccess implements Action {\r\n    readonly type = AppActionType.FETCH_USER_DATA_SUCCESS;\r\n    constructor(public payload: any) {}\r\n}\r\n\r\nexport class FetchUserDataError implements Action {\r\n    readonly type = AppActionType.FETCH_USER_DATA_ERROR;\r\n    constructor(public error: any) {}\r\n}\r\nexport type AppAction = \r\n| FetchUserData\r\n| FetchUserDataSuccess;",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "payload",
+                        "type": "any"
+                    }
+                ],
+                "line": 14,
+                "jsdoctags": [
+                    {
+                        "name": "payload",
+                        "type": "any",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "properties": [
+                {
+                    "name": "payload",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 15,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "type",
+                    "defaultValue": "AppActionType.FETCH_USER_DATA_SUCCESS",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14,
+                    "modifierKind": [
+                        132
+                    ]
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "implements": [
+                "Action"
+            ]
+        }
+    ],
+    "directives": [],
+    "components": [
+        {
+            "name": "AngularMaterialComponent",
+            "id": "component-AngularMaterialComponent-d03bda864dbcd3f3a4e390ae52144a78",
+            "file": "src/app/components/angular-material/angular-material.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-angular-material",
+            "styleUrls": [
+                "./angular-material.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./angular-material.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-angular-material',\n  templateUrl: './angular-material.component.html',\n  styleUrls: ['./angular-material.component.scss']\n})\nexport class AngularMaterialComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./angular-material.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<h1>Angular material</h1>\n"
+        },
+        {
+            "name": "AppComponent",
+            "id": "component-AppComponent-624787eb8c8aad8d9a854bc38f29c8a3",
+            "file": "src/app/app.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-root",
+            "styleUrls": [
+                "./app.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./app.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "store",
+                    "type": "Store<AppState>",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Store } from '@ngrx/store';\nimport { AppState } from './app.model';\nimport { FetchUserData } from './store/app.actions';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent implements OnInit {\n  constructor(  public store: Store<AppState>,){\n  }\n  ngOnInit(){\n    this.store.dispatch(new FetchUserData());\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "\r\n@import '../styles.scss';\r\n\r\n:host(app-root) {\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n    min-height: 100%;\r\n    min-width: 100%;\r\n    // @media only screen and (max-width: $tablet){\r\n    //     min-width: 50%\r\n    // }\r\n    main {\r\n        display: flex;\r\n        min-height: 100%;\r\n        min-width: 100%;\r\n    }\r\n}\r\n\r\n    \r\n  \r\n  ",
+                    "styleUrl": "./app.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "store",
+                        "type": "Store<AppState>"
+                    }
+                ],
+                "line": 11,
+                "jsdoctags": [
+                    {
+                        "name": "store",
+                        "type": "Store<AppState>",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": " <nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\n\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\n    <ul class=\"navbar-nav\">\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" [routerLink]=\"['/flexbox-website']\">Responsive Flex-Layout</a>\n      </li>\n      <li class=\"nav-item active\">\n        <a class=\"nav-link\" [routerLink]=\"['/flexbox-image-gallary']\"> Responsive Grid-Layout</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/dynamic-component-loading']\">Dynamic-component-loading</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/angular-material']\">Angular-material</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/bootstrap']\">Bootstrap</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" [routerLink]=\"['/ngrx']\">NgRx</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" href=\"http://localhost:6006/\" target=\"_blank\">Storybook</a>\n      </li>\n    </ul>\n  </div>\n</nav> \n\n<div class=\"container\">\n  <router-outlet>\n  </router-outlet>\n</div>\n\n\n\n"
+        },
+        {
+            "name": "BootstrapComponent",
+            "id": "component-BootstrapComponent-4d3da67846477dd2b6c40d4a703ea368",
+            "file": "src/app/components/bootstrap/bootstrap.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-bootstrap",
+            "styleUrls": [
+                "./bootstrap.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./bootstrap.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-bootstrap',\n  templateUrl: './bootstrap.component.html',\n  styleUrls: ['./bootstrap.component.scss']\n})\nexport class BootstrapComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./bootstrap.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"container\">\n    <h1>My First Bootstrap Page</h1>\n    <p>This is some text.</p>\n  </div>\n<!-- <div class=\"container-sm border\">.container-sm</div>\n<div class=\"container-md mt-3 border\">.container-md</div>\n<div class=\"container-lg mt-3 border\">.container-lg</div>\n<div class=\"container-xl mt-3 border\">.container-xl</div> -->\n\n"
+        },
+        {
+            "name": "ButtonComponent",
+            "id": "component-ButtonComponent-642c6c4e474cd5a0ac760dfda26b2fc9",
+            "file": "src/stories/button.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-button",
+            "styleUrls": [
+                "./button.css"
+            ],
+            "styles": [],
+            "template": "<button   type=\"button\"\n   (click)=\"onClick.emit($event)\"\n   [ngClass]=\"classes\"\n   [ngStyle]=\"{ 'background-color': backgroundColor }\"\n >\n   {{ label }}\n </button>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "backgroundColor",
+                    "description": "<p>What background color to use</p>\n",
+                    "line": 26,
+                    "type": "string"
+                },
+                {
+                    "name": "label",
+                    "defaultValue": "'Button'",
+                    "description": "<p>Button contents</p>\n",
+                    "line": 40
+                },
+                {
+                    "name": "primary",
+                    "defaultValue": "false",
+                    "description": "<p>Is this the principal call to action on the page?</p>\n",
+                    "line": 20
+                },
+                {
+                    "name": "size",
+                    "defaultValue": "'medium'",
+                    "description": "<p>How large should the button be?</p>\n",
+                    "line": 32,
+                    "type": "\"small\" | \"medium\" | \"large\""
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onClick",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "description": "<p>Optional click handler</p>\n",
+                    "line": 46,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  template: ` <button\n    type=\"button\"\n    (click)=\"onClick.emit($event)\"\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    {{ label }}\n  </button>`,\n  styleUrls: ['./button.css'],\n})\nexport default class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
+                    "styleUrl": "./button.css"
+                }
+            ],
+            "stylesData": "",
+            "accessors": {
+                "classes": {
+                    "name": "classes",
+                    "getSignature": {
+                        "name": "classes",
+                        "type": "[]",
+                        "returnType": "string[]",
+                        "line": 48
+                    }
+                }
+            }
+        },
+        {
+            "name": "DynamicLoadingComponent",
+            "id": "component-DynamicLoadingComponent-a8fa5fe7aade284cabb2345da00c876a",
+            "file": "src/app/components/dynamic-loading/dynamic-loading.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-dynamic-loading",
+            "styleUrls": [
+                "./dynamic-loading.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./dynamic-loading.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "elementUrl",
+                    "defaultValue": "'../flexbox-website/flexbox-website.component'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "url",
+                    "defaultValue": "\"https://unpkg.com/ink-components\"",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "xAxis",
+                    "defaultValue": "[-6.28, 6.28]",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 15
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { FlexboxWebsiteComponent } from '../flexbox-website/flexbox-website.component'\n\n@Component({\n  selector: 'app-dynamic-loading',\n  templateUrl: './dynamic-loading.component.html',\n  styleUrls: ['./dynamic-loading.component.scss']\n})\nexport class DynamicLoadingComponent implements OnInit {\n\n  constructor() { }\n  url = \"https://unpkg.com/ink-components\";\n  xAxis = [-6.28, 6.28]\n  elementUrl = '../flexbox-website/flexbox-website.component';\n  ngOnInit(): void {\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./dynamic-loading.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 9
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<!-- <mwc-icon *axLazyElement=\"'https://unpkg.com/@material/mwc-icon@0.6.0/mwc-icon.js?module'; module: true\">\n    favorite\n</mwc-icon> -->\n\n\n<ink-chart *axLazyElement=\"url\" [xlim]=\"xAxis\">\n    <ink-chart-eqn eqn=\"Math.sin(x)\"></ink-chart-eqn>\n  </ink-chart>"
+        },
+        {
+            "name": "FlexboxImageGallaryComponent",
+            "id": "component-FlexboxImageGallaryComponent-fee4d2e0d7b0ae051ee97938b826f5b9",
+            "file": "src/app/components/flexbox-image-gallary/flexbox-image-gallary.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-flexbox-image-gallary",
+            "styleUrls": [
+                "./flexbox-image-gallary.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./flexbox-image-gallary.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-flexbox-image-gallary',\n  templateUrl: './flexbox-image-gallary.component.html',\n  styleUrls: ['./flexbox-image-gallary.component.scss']\n})\nexport class FlexboxImageGallaryComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./flexbox-image-gallary.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": ""
+        },
+        {
+            "name": "FlexboxWebsiteComponent",
+            "id": "component-FlexboxWebsiteComponent-22cab7990625a1c184ddd870e1364c7e",
+            "file": "src/app/components/flexbox-website/flexbox-website.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-flexbox-website",
+            "styleUrls": [
+                "./flexbox-website.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./flexbox-website.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-flexbox-website',\n  templateUrl: './flexbox-website.component.html',\n  styleUrls: ['./flexbox-website.component.scss']\n})\nexport class FlexboxWebsiteComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "@import '../../../styles.scss';\r\n\r\n// img{\r\n   \r\n//     @media only screen and (max-width: $tablet){\r\n//         width: 140px;\r\n//     }\r\n  \r\n// }\r\n\r\n.web-container{\r\n    .card-container{\r\n        width: 100%;\r\n        column-width: 19em;\r\n        -webkit-column-width: 19em;\r\n        column-gap: 1em;\r\n        -webkit-column-gap: 1em;\r\n        @media screen and (max-width: 320px) {\r\n            img {\r\n                width      : 174px;\r\n                height     : 106px;\r\n            }\r\n        }\r\n    }\r\n}\r\n\r\n\r\n@media screen and (max-width: 375px) and (min-width: 320px) {\r\n\r\n}\r\n\r\n@media screen and (max-width: 425px) and (min-width: 375px) {\r\n   \r\n}\r\n\r\n@media screen and (max-width: 768px) and (min-width: 425px) {\r\n    \r\n\r\n}\r\n\r\n@media screen and (max-width: 1024px) and (min-width: 768px) {\r\n   \r\n}\r\n\r\n\r\n",
+                    "styleUrl": "./flexbox-website.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"web-container\">\n  <div class=\"card-container\">\n    <mdb-card>\n      <div class=\"view rgba-white-slight waves-light\" mdbWavesEffect>\n        <mdb-card-img src=\"https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg\" alt=\"Card image cap\"></mdb-card-img>\n        <a>\n          <div class=\"mask\"></div>\n        </a>\n      </div>\n      <mdb-card-body>\n        <mdb-card-title>\n          <h4>Card Title</h4>\n        </mdb-card-title>\n        <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's\n          content.\n        </mdb-card-text>\n        <a href=\"#\" mdbBtn color=\"primary\" mdbWavesEffect>Button</a>\n      </mdb-card-body>\n    </mdb-card>\n    <mdb-card>\n      <div class=\"view rgba-white-slight waves-light\" mdbWavesEffect>\n        <mdb-card-img src=\"https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg\" alt=\"Card image cap\"></mdb-card-img>\n        <a>\n          <div class=\"mask\"></div>\n        </a>\n      </div>\n      <mdb-card-body>\n        <mdb-card-title>\n          <h4>Card Title</h4>\n        </mdb-card-title>\n        <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's\n          content.\n        </mdb-card-text>\n        <a href=\"#\" mdbBtn color=\"primary\" mdbWavesEffect>Button</a>\n      </mdb-card-body>\n    </mdb-card>\n    <mdb-card>\n      <div class=\"view rgba-white-slight waves-light\" mdbWavesEffect>\n        <mdb-card-img src=\"https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg\" alt=\"Card image cap\"></mdb-card-img>\n        <a>\n          <div class=\"mask\"></div>\n        </a>\n      </div>\n      <mdb-card-body>\n        <mdb-card-title>\n          <h4>Card Title</h4>\n        </mdb-card-title>\n        <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's\n          content.\n        </mdb-card-text>\n        <a href=\"#\" mdbBtn color=\"primary\" mdbWavesEffect>Button</a>\n      </mdb-card-body>\n    </mdb-card>\n    <mdb-card>\n      <div class=\"view rgba-white-slight waves-light\" mdbWavesEffect>\n        <mdb-card-img src=\"https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg\" alt=\"Card image cap\"></mdb-card-img>\n        <a>\n          <div class=\"mask\"></div>\n        </a>\n      </div>\n      <mdb-card-body>\n        <mdb-card-title>\n          <h4>Card Title</h4>\n        </mdb-card-title>\n        <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's\n          content.\n        </mdb-card-text>\n        <a href=\"#\" mdbBtn color=\"primary\" mdbWavesEffect>Button</a>\n      </mdb-card-body>\n    </mdb-card>\n    <mdb-card>\n      <div class=\"view rgba-white-slight waves-light\" mdbWavesEffect>\n        <mdb-card-img src=\"https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg\" alt=\"Card image cap\"></mdb-card-img>\n        <a>\n          <div class=\"mask\"></div>\n        </a>\n      </div>\n      <mdb-card-body>\n        <mdb-card-title>\n          <h4>Card Title</h4>\n        </mdb-card-title>\n        <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's\n          content.\n        </mdb-card-text>\n        <a href=\"#\" mdbBtn color=\"primary\" mdbWavesEffect>Button</a>\n      </mdb-card-body>\n    </mdb-card>\n    <mdb-card>\n      <div class=\"view rgba-white-slight waves-light\" mdbWavesEffect>\n        <mdb-card-img src=\"https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg\" alt=\"Card image cap\"></mdb-card-img>\n        <a>\n          <div class=\"mask\"></div>\n        </a>\n      </div>\n      <mdb-card-body>\n        <mdb-card-title>\n          <h4>Card Title</h4>\n        </mdb-card-title>\n        <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's\n          content.\n        </mdb-card-text>\n        <a href=\"#\" mdbBtn color=\"primary\" mdbWavesEffect>Button</a>\n      </mdb-card-body>\n    </mdb-card>\n    <!-- <img src=\"../../../assets/images/banenr.png\">\n    <img src=\"../../../assets/images/banenr.png\">\n    <img src=\"../../../assets/images/banenr.png\"> -->\n  </div>\n</div>\n\n<!-- <img src=\"../../../assets/images/banenr.png\"> -->\n"
+        },
+        {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-246e2a69dc126a3bd76c6328dd3b93e2",
+            "file": "src/stories/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-header",
+            "styleUrls": [
+                "./header.css"
+            ],
+            "styles": [],
+            "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "line": 53,
+                    "type": "unknown"
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onCreateAccount",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "line": 62,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogin",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "line": 56,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogout",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "line": 59,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".wrapper {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\nsvg {\n  display: inline-block;\n  vertical-align: top;\n}\n\nh1 {\n  font-weight: 900;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\nbutton + button {\n  margin-left: 10px;\n}\n",
+                    "styleUrl": "./header.css"
+                }
+            ],
+            "stylesData": ""
+        },
+        {
+            "name": "NgrxComponent",
+            "id": "component-NgrxComponent-7406f37dce842b1ae44f4281d11bcae1",
+            "file": "src/app/components/ngrx/ngrx.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-ngrx",
+            "styleUrls": [
+                "./ngrx.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./ngrx.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "selectPermissions$",
+                    "defaultValue": "this.store.select(selectData)",
+                    "type": "Observable<any>",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
+                    "name": "store",
+                    "type": "Store<AppState>",
+                    "optional": false,
+                    "description": "",
+                    "line": 14,
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 18
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\nimport { Store } from '@ngrx/store';\nimport { AppState } from 'src/app/app.model';\nimport { Observable } from 'rxjs'; \nimport { selectData } from '../../store/app.selectors'\n\n@Component({\n  selector: 'app-ngrx',\n  templateUrl: './ngrx.component.html',\n  styleUrls: ['./ngrx.component.scss']\n})\nexport class NgrxComponent implements OnInit {\n\n  constructor(  public store: Store<AppState>) { }\n\n  public selectPermissions$: Observable<any> = this.store.select(selectData);\n\n  ngOnInit(): void {\n    this.selectPermissions$.subscribe(data => {\n      console.log(data);\n      \n    })\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./ngrx.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "store",
+                        "type": "Store<AppState>"
+                    }
+                ],
+                "line": 12,
+                "jsdoctags": [
+                    {
+                        "name": "store",
+                        "type": "Store<AppState>",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<h1>Countries</h1>\n<ul *ngFor = \"let data of (selectPermissions$ | async) \">\n    <li>{{data}}</li>\n</ul>\n"
+        },
+        {
+            "name": "PageComponent",
+            "id": "component-PageComponent-cca1a8911321fa17756ce90c90de65cc",
+            "file": "src/stories/page.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "storybook-page",
+            "styleUrls": [
+                "./page.css"
+            ],
+            "styles": [],
+            "template": "<article>    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://www.learnstorybook.com\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Learn Storybook\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\">\n          docs\n        </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "user",
+                    "defaultValue": "null",
+                    "line": 66,
+                    "type": "unknown"
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "onCreateAccount",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "line": 75,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogin",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "line": 69,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "onLogout",
+                    "defaultValue": "new EventEmitter<Event>()",
+                    "line": 72,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-page',\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://www.learnstorybook.com\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Learn Storybook\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\">\n          docs\n        </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\nexport default class PageComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n\n// export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (\n//   <article>\n//     <Header user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />\n\n// );\n// Page.propTypes = {\n//   user: PropTypes.shape({}),\n//   onLogin: PropTypes.func.isRequired,\n//   onLogout: PropTypes.func.isRequired,\n//   onCreateAccount: PropTypes.func.isRequired,\n// };\n\n// Page.defaultProps = {\n//   user: null,\n// };\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "section {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 24px;\n  padding: 48px 20px;\n  margin: 0 auto;\n  max-width: 600px;\n  color: #333;\n}\n\nh2 {\n  font-weight: 900;\n  font-size: 32px;\n  line-height: 1;\n  margin: 0 0 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n\np {\n  margin: 1em 0;\n}\n\na {\n  text-decoration: none;\n  color: #1ea7fd;\n}\n\nul {\n  padding-left: 30px;\n  margin: 1em 0;\n}\n\nli {\n  margin-bottom: 8px;\n}\n\n.tip {\n  display: inline-block;\n  border-radius: 1em;\n  font-size: 11px;\n  line-height: 12px;\n  font-weight: 700;\n  background: #e7fdd8;\n  color: #66bf3c;\n  padding: 4px 12px;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\n.tip-wrapper {\n  font-size: 13px;\n  line-height: 20px;\n  margin-top: 40px;\n  margin-bottom: 40px;\n}\n\n.tip-wrapper svg {\n  display: inline-block;\n  height: 12px;\n  width: 12px;\n  margin-right: 4px;\n  vertical-align: top;\n  margin-top: 3px;\n}\n\n.tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
+                    "styleUrl": "./page.css"
+                }
+            ],
+            "stylesData": ""
+        }
+    ],
+    "modules": [
+        {
+            "name": "AppModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "AngularMaterialComponent"
+                        },
+                        {
+                            "name": "AppComponent"
+                        },
+                        {
+                            "name": "BootstrapComponent"
+                        },
+                        {
+                            "name": "DynamicLoadingComponent"
+                        },
+                        {
+                            "name": "FlexboxImageGallaryComponent"
+                        },
+                        {
+                            "name": "FlexboxWebsiteComponent"
+                        },
+                        {
+                            "name": "NgrxComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "AppRoutingModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": [
+                        {
+                            "name": "AppComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "AppRoutingModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        }
+    ],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "context",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/test.ts",
+                "type": "",
+                "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.prod.ts",
+                "type": "object",
+                "defaultValue": "{\n  production: true\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "type": "object",
+                "defaultValue": "{\n  production: false\n}"
+            },
+            {
+                "name": "Large",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LoggedIn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Page.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "LoggedOut",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Page.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "require",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/test.ts",
+                "type": "literal type"
+            },
+            {
+                "name": "Secondary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "selectApp",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/store/app.selectors.ts",
+                "type": "",
+                "defaultValue": "(state: AppState) => state.appModel"
+            },
+            {
+                "name": "selectData",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/store/app.selectors.ts",
+                "type": "",
+                "defaultValue": "createSelector(\r\n    selectApp,\r\n    (state: AppModelState) => {\r\n        return state.data;\r\n    }\r\n)"
+            },
+            {
+                "name": "Small",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Button.stories.ts",
+                "type": "Story<Button>",
+                "defaultValue": "(args: Button) => ({\n  component: Button,\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Header.stories.ts",
+                "type": "Story<Header>",
+                "defaultValue": "(args: Header) => ({\n  component: Header,\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/Page.stories.ts",
+                "type": "Story<Page>",
+                "defaultValue": "(args: Page) => ({\n  component: Page,\n  props: args,\n})"
+            }
+        ],
+        "functions": [
+            {
+                "name": "appReducer",
+                "file": "src/app/store/app.reducer.ts",
+                "ctype": "miscellaneous",
+                "subtype": "function",
+                "description": "",
+                "args": [
+                    {
+                        "name": "state"
+                    },
+                    {
+                        "name": "action"
+                    }
+                ],
+                "returnType": "AppModelState",
+                "jsdoctags": [
+                    {
+                        "name": "state",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "action",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            }
+        ],
+        "typealiases": [
+            {
+                "name": "AppAction",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "FetchUserData | FetchUserDataSuccess",
+                "file": "src/app/store/app.actions.ts",
+                "description": "",
+                "kind": 168
+            }
+        ],
+        "enumerations": [
+            {
+                "name": "AppActionType",
+                "childs": [
+                    {
+                        "name": "FETCH_USER_DATA",
+                        "value": "Activity: FETCH_USER_DATA"
+                    },
+                    {
+                        "name": "FETCH_USER_DATA_SUCCESS",
+                        "value": "Activity: FETCH_USER_DATA_SUCCESS"
+                    },
+                    {
+                        "name": "FETCH_USER_DATA_ERROR",
+                        "value": "Activity: FETCH_USER_DATA_ERROR"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "description": "",
+                "file": "src/app/store/app.actions.ts"
+            }
+        ],
+        "groupedVariables": {
+            "src/test.ts": [
+                {
+                    "name": "context",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "type": "",
+                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                },
+                {
+                    "name": "require",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "type": "literal type"
+                }
+            ],
+            "src/environments/environment.prod.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.prod.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  production: true\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "type": "object",
+                    "defaultValue": "{\n  production: false\n}"
+                }
+            ],
+            "src/stories/Button.stories.ts": [
+                {
+                    "name": "Large",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Secondary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Small",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Button.stories.ts",
+                    "type": "Story<Button>",
+                    "defaultValue": "(args: Button) => ({\n  component: Button,\n  props: args,\n})"
+                }
+            ],
+            "src/stories/Header.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Header.stories.ts",
+                    "type": "Story<Header>",
+                    "defaultValue": "(args: Header) => ({\n  component: Header,\n  props: args,\n})"
+                }
+            ],
+            "src/stories/Page.stories.ts": [
+                {
+                    "name": "LoggedIn",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "LoggedOut",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/Page.stories.ts",
+                    "type": "Story<Page>",
+                    "defaultValue": "(args: Page) => ({\n  component: Page,\n  props: args,\n})"
+                }
+            ],
+            "src/app/store/app.selectors.ts": [
+                {
+                    "name": "selectApp",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/store/app.selectors.ts",
+                    "type": "",
+                    "defaultValue": "(state: AppState) => state.appModel"
+                },
+                {
+                    "name": "selectData",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/store/app.selectors.ts",
+                    "type": "",
+                    "defaultValue": "createSelector(\r\n    selectApp,\r\n    (state: AppModelState) => {\r\n        return state.data;\r\n    }\r\n)"
+                }
+            ]
+        },
+        "groupedFunctions": {
+            "src/app/store/app.reducer.ts": [
+                {
+                    "name": "appReducer",
+                    "file": "src/app/store/app.reducer.ts",
+                    "ctype": "miscellaneous",
+                    "subtype": "function",
+                    "description": "",
+                    "args": [
+                        {
+                            "name": "state"
+                        },
+                        {
+                            "name": "action"
+                        }
+                    ],
+                    "returnType": "AppModelState",
+                    "jsdoctags": [
+                        {
+                            "name": "state",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "action",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "groupedEnumerations": {
+            "src/app/store/app.actions.ts": [
+                {
+                    "name": "AppActionType",
+                    "childs": [
+                        {
+                            "name": "FETCH_USER_DATA",
+                            "value": "Activity: FETCH_USER_DATA"
+                        },
+                        {
+                            "name": "FETCH_USER_DATA_SUCCESS",
+                            "value": "Activity: FETCH_USER_DATA_SUCCESS"
+                        },
+                        {
+                            "name": "FETCH_USER_DATA_ERROR",
+                            "value": "Activity: FETCH_USER_DATA_ERROR"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "description": "",
+                    "file": "src/app/store/app.actions.ts"
+                }
+            ]
+        },
+        "groupedTypeAliases": {
+            "src/app/store/app.actions.ts": [
+                {
+                    "name": "AppAction",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "FetchUserData | FetchUserDataSuccess",
+                    "file": "src/app/store/app.actions.ts",
+                    "description": "",
+                    "kind": 168
+                }
+            ]
+        }
+    },
+    "routes": {
+        "name": "<root>",
+        "kind": "module",
+        "className": "AppModule",
+        "children": [
+            {
+                "name": "routes",
+                "filename": "src/app/app-routing.module.ts",
+                "module": "AppRoutingModule",
+                "children": [
+                    {
+                        "path": "flexbox-website",
+                        "component": "FlexboxWebsiteComponent"
+                    },
+                    {
+                        "path": "flexbox-image-gallary",
+                        "component": "FlexboxImageGallaryComponent"
+                    },
+                    {
+                        "path": "dynamic-component-loading",
+                        "component": "DynamicLoadingComponent"
+                    },
+                    {
+                        "path": "angular-material",
+                        "component": "AngularMaterialComponent"
+                    },
+                    {
+                        "path": "bootstrap",
+                        "component": "BootstrapComponent"
+                    },
+                    {
+                        "path": "ngrx",
+                        "component": "NgrxComponent"
+                    }
+                ],
+                "kind": "module"
+            }
+        ]
+    },
+    "coverage": {
+        "count": 2,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "src/app/app.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/app.model.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "AppState",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/angular-material/angular-material.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AngularMaterialComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/bootstrap/bootstrap.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "BootstrapComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/dynamic-loading/dynamic-loading.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DynamicLoadingComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/flexbox-image-gallary/flexbox-image-gallary.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FlexboxImageGallaryComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/flexbox-website/flexbox-website.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "FlexboxWebsiteComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/ngrx/ngrx.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "NgrxComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/effects/app.effects.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "AppEffects",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/models/appModel.model.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "AppModelState",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/services/app-service.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "AppServiceService",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/store/app.actions.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "FetchUserData",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/store/app.actions.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "FetchUserDataError",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/store/app.actions.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "FetchUserDataSuccess",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/store/app.reducer.ts",
+                "type": "function",
+                "linksubtype": "function",
+                "name": "appReducer",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/store/app.selectors.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "selectApp",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/store/app.selectors.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "selectData",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.prod.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/environments/environment.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Large",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Secondary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Small",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedOut",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Header.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedIn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "LoggedOut",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/Page.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/button.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ButtonComponent",
+                "coveragePercent": 83,
+                "coverageCount": "5/6",
+                "status": "very-good"
+            },
+            {
+                "filePath": "src/stories/header.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/page.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "PageComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "context",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/test.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "require",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}

@@ -1,0 +1,45 @@
+@import '../../../styles.scss';
+
+// img{
+   
+//     @media only screen and (max-width: $tablet){
+//         width: 140px;
+//     }
+  
+// }
+
+.web-container{
+    .card-container{
+        width: 100%;
+        column-width: 19em;
+        -webkit-column-width: 19em;
+        column-gap: 1em;
+        -webkit-column-gap: 1em;
+        @media screen and (max-width: 320px) {
+            img {
+                width      : 174px;
+                height     : 106px;
+            }
+        }
+    }
+}
+
+
+@media screen and (max-width: 375px) and (min-width: 320px) {
+
+}
+
+@media screen and (max-width: 425px) and (min-width: 375px) {
+   
+}
+
+@media screen and (max-width: 768px) and (min-width: 425px) {
+    
+
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+   
+}
+
+
